@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arabic Keyboard Online - Free Typing Tool | Type Arabic</title>
+    <meta
+      name="description"
+      content="Modern Arabic keyboard with smart transliteration. Supports both modern and legacy typing modes. Free online tool for Arabic typing."
+    />
+    <meta
+      name="keywords"
+      content="arabic keyboard, clavier arabe, arabic typing, type arabic online, arabic keyboard online"
+    />
+    <link rel="canonical" href="https://arabickeyboard.com/" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --black: #000000;
+        --white: #ffffff;
+        --gray-50: #fafafa;
+        --gray-100: #f5f5f5;
+        --gray-200: #e5e5e5;
+        --gray-300: #d4d4d4;
+        --gray-400: #a3a3a3;
+        --gray-500: #737373;
+        --gray-600: #525252;
+        --gray-700: #404040;
+        --gray-800: #262626;
+        --gray-900: #171717;
+        --radius: 8px;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px -1px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Helvetica Neue", Arial, sans-serif;
+        background: var(--white);
+        color: var(--black);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      header {
+        border-bottom: 1px solid var(--gray-200);
+        padding: 24px 0;
+        position: sticky;
+        top: 0;
+        background: var(--white);
+        z-index: 100;
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .logo {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--black);
+        text-decoration: none;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .lang-select {
+        background: var(--white);
+        border: 1px solid var(--gray-300);
+        padding: 8px 16px;
+        border-radius: var(--radius);
+        font-size: 14px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-family: inherit;
+      }
+
+      .lang-select:hover {
+        border-color: var(--black);
+      }
+
+      .lang-select:focus {
+        outline: 2px solid var(--black);
+        outline-offset: 2px;
+      }
+
+      .tool-section {
+        padding: 48px 0;
+      }
+
+      .tool-header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .tool-header h1 {
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        margin-bottom: 12px;
+      }
+
+      .tool-header p {
+        font-size: 16px;
+        color: var(--gray-600);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .mode-toggle {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 32px;
+        background: var(--gray-100);
+        border-radius: var(--radius);
+        padding: 4px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .mode-btn {
+        background: transparent;
+        border: none;
+        padding: 12px 32px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+        border-radius: 6px;
+        font-family: inherit;
+        color: var(--gray-600);
+      }
+
+      .mode-btn.active {
+        background: var(--white);
+        color: var(--black);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .mode-btn:hover:not(.active) {
+        color: var(--black);
+      }
+
+      .editor-container {
+        background: var(--white);
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 24px;
+        transition: var(--transition);
+      }
+
+      .editor-container:focus-within {
+        border-color: var(--black);
+        box-shadow: var(--shadow-md);
+      }
+
+      #textArea {
+        width: 100%;
+        min-height: 200px;
+        padding: 24px;
+        border: none;
+        font-size: 24px;
+        font-family: "Simplified Arabic", "Geeza Pro", "Traditional Arabic",
+          "Arial Unicode MS", sans-serif;
+        direction: rtl;
+        resize: vertical;
+        background: transparent;
+        color: var(--black);
+      }
+
+      #textArea:focus {
+        outline: none;
+      }
+
+      #textArea::placeholder {
+        color: var(--gray-400);
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+      }
+
+      .btn {
+        background: var(--black);
+        color: var(--white);
+        border: 1px solid var(--black);
+        padding: 12px 24px;
+        border-radius: var(--radius);
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+        font-family: inherit;
+      }
+
+      .btn:hover {
+        background: var(--gray-900);
+      }
+
+      .btn:active {
+        transform: scale(0.98);
+      }
+
+      .btn-secondary {
+        background: var(--white);
+        color: var(--black);
+      }
+
+      .btn-secondary:hover {
+        background: var(--gray-50);
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .keyboard-section {
+        margin-bottom: 32px;
+      }
+
+      .keyboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .keyboard-header h2 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .keyboard-toggle {
+        background: none;
+        border: none;
+        color: var(--gray-600);
+        cursor: pointer;
+        font-size: 14px;
+        padding: 8px;
+        transition: var(--transition);
+      }
+
+      .keyboard-toggle:hover {
+        color: var(--black);
+      }
+
+      .keyboard {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        padding: 24px;
+      }
+
+      .keyboard-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+        justify-content: center;
+      }
+
+      .keyboard-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .key {
+        background: var(--white);
+        border: 1px solid var(--gray-300);
+        padding: 12px 16px;
+        min-width: 48px;
+        border-radius: 6px;
+        font-size: 20px;
+        font-family: "Simplified Arabic", "Geeza Pro", sans-serif;
+        cursor: pointer;
+        transition: var(--transition);
+        user-select: none;
+        text-align: center;
+      }
+
+      .key:hover {
+        background: var(--gray-100);
+        border-color: var(--gray-400);
+      }
+
+      .key:active {
+        transform: scale(0.95);
+        background: var(--gray-200);
+      }
+
+      .key-small {
+        font-size: 14px;
+        min-width: auto;
+        padding: 8px 12px;
+      }
+
+      .key-label {
+        display: block;
+        font-size: 11px;
+        color: var(--gray-500);
+        margin-top: 4px;
+      }
+
+      .guide {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        padding: 24px;
+        margin-bottom: 48px;
+      }
+
+      .guide h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .guide-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+      }
+
+      .guide-item {
+        font-size: 14px;
+        color: var(--gray-600);
+        padding: 8px 0;
+      }
+
+      .guide-item code {
+        background: var(--white);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: "Monaco", "Menlo", monospace;
+        font-size: 13px;
+        color: var(--black);
+        border: 1px solid var(--gray-200);
+      }
+
+      .content {
+        padding: 48px 0;
+        border-top: 1px solid var(--gray-200);
+      }
+
+      .content h2 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 24px;
+        letter-spacing: -0.02em;
+      }
+
+      .content h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 32px;
+        margin-bottom: 16px;
+      }
+
+      .content p {
+        color: var(--gray-600);
+        margin-bottom: 16px;
+        line-height: 1.7;
+      }
+
+      .content ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 24px;
+      }
+
+      .content li {
+        padding-left: 24px;
+        position: relative;
+        margin-bottom: 12px;
+        color: var(--gray-600);
+      }
+
+      .content li:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--black);
+        font-weight: bold;
+      }
+
+      footer {
+        border-top: 1px solid var(--gray-200);
+        padding: 48px 0;
+        margin-top: 48px;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 24px;
+      }
+
+      .footer-links a {
+        color: var(--gray-600);
+        text-decoration: none;
+        font-size: 14px;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--black);
+      }
+
+      .copyright {
+        color: var(--gray-500);
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 16px;
+        }
+
+        header {
+          padding: 16px 0;
+        }
+
+        .logo {
+          font-size: 18px;
+        }
+
+        .tool-header h1 {
+          font-size: 28px;
+        }
+
+        #textArea {
+          font-size: 20px;
+          min-height: 160px;
+        }
+
+        .mode-toggle {
+          width: 100%;
+        }
+
+        .mode-btn {
+          flex: 1;
+          padding: 12px 16px;
+        }
+
+        .actions {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .keyboard-row {
+          gap: 4px;
+        }
+
+        .key {
+          min-width: 40px;
+          padding: 10px 12px;
+          font-size: 18px;
+        }
+
+        .guide-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: var(--black);
+        color: var(--white);
+        padding: 16px 24px;
+        border-radius: var(--radius);
+        font-size: 14px;
+        box-shadow: var(--shadow-md);
+        transform: translateY(100px);
+        opacity: 0;
+        transition: var(--transition);
+        z-index: 1000;
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <a href="/" class="logo">Arabic Keyboard</a>
+          <div class="header-actions">
+            <select class="lang-select" aria-label="Select Language">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+              <option value="fr">Français</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="tool-section">
+        <div class="container">
+          <div class="tool-header">
+            <h1>Type Arabic Online</h1>
+            <p>
+              Professional Arabic keyboard with smart transliteration. Choose
+              your preferred typing method.
+            </p>
+          </div>
+
+          <div class="mode-toggle">
+            <button
+              class="mode-btn active"
+              data-mode="modern"
+              aria-label="Modern typing mode"
+            >
+              Modern
+            </button>
+            <button
+              class="mode-btn"
+              data-mode="legacy"
+              aria-label="Legacy typing mode"
+            >
+              Legacy
+            </button>
+          </div>
+
+          <div class="editor-container">
+            <textarea
+              id="textArea"
+              placeholder="ابدأ الكتابة هنا..."
+              aria-label="Arabic text editor"
+              spellcheck="false"
+              autocomplete="off"
+            ></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" id="copyBtn" aria-label="Copy text">
+              Copy Text
+            </button>
+            <button
+              class="btn btn-secondary"
+              id="downloadBtn"
+              aria-label="Download text"
+            >
+              Download
+            </button>
+            <button
+              class="btn btn-secondary"
+              id="clearBtn"
+              aria-label="Clear text"
+            >
+              Clear
+            </button>
+          </div>
+
+          <div class="keyboard-section">
+            <div class="keyboard-header">
+              <h2>Virtual Keyboard</h2>
+              <button
+                class="keyboard-toggle"
+                id="keyboardToggle"
+                aria-label="Toggle keyboard"
+              >
+                Show/Hide
+              </button>
+            </div>
+            <div class="keyboard" id="keyboard">
+              <div class="keyboard-row">
+                <button class="key" data-char="ا">
+                  ا<span class="key-label">a</span>
+                </button>
+                <button class="key" data-char="ب">
+                  ب<span class="key-label">b</span>
+                </button>
+                <button class="key" data-char="ت">
+                  ت<span class="key-label">t</span>
+                </button>
+                <button class="key" data-char="ث">
+                  ث<span class="key-label">th</span>
+                </button>
+                <button class="key" data-char="ج">
+                  ج<span class="key-label">j</span>
+                </button>
+                <button class="key" data-char="ح">
+                  ح<span class="key-label">H</span>
+                </button>
+                <button class="key" data-char="خ">
+                  خ<span class="key-label">kh</span>
+                </button>
+                <button class="key" data-char="د">
+                  د<span class="key-label">d</span>
+                </button>
+                <button class="key" data-char="ذ">
+                  ذ<span class="key-label">dh</span>
+                </button>
+                <button class="key" data-char="ر">
+                  ر<span class="key-label">r</span>
+                </button>
+                <button class="key" data-char="ز">
+                  ز<span class="key-label">z</span>
+                </button>
+              </div>
+              <div class="keyboard-row">
+                <button class="key" data-char="س">
+                  س<span class="key-label">s</span>
+                </button>
+                <button class="key" data-char="ش">
+                  ش<span class="key-label">sh</span>
+                </button>
+                <button class="key" data-char="ص">
+                  ص<span class="key-label">S</span>
+                </button>
+                <button class="key" data-char="ض">
+                  ض<span class="key-label">D</span>
+                </button>
+                <button class="key" data-char="ط">
+                  ط<span class="key-label">T</span>
+                </button>
+                <button class="key" data-char="ظ">
+                  ظ<span class="key-label">Z</span>
+                </button>
+                <button class="key" data-char="ع">
+                  ع<span class="key-label">3</span>
+                </button>
+                <button class="key" data-char="غ">
+                  غ<span class="key-label">gh</span>
+                </button>
+                <button class="key" data-char="ف">
+                  ف<span class="key-label">f</span>
+                </button>
+                <button class="key" data-char="ق">
+                  ق<span class="key-label">q</span>
+                </button>
+                <button class="key" data-char="ك">
+                  ك<span class="key-label">k</span>
+                </button>
+              </div>
+              <div class="keyboard-row">
+                <button class="key" data-char="ل">
+                  ل<span class="key-label">l</span>
+                </button>
+                <button class="key" data-char="م">
+                  م<span class="key-label">m</span>
+                </button>
+                <button class="key" data-char="ن">
+                  ن<span class="key-label">n</span>
+                </button>
+                <button class="key" data-char="ه">
+                  ه<span class="key-label">h</span>
+                </button>
+                <button class="key" data-char="و">
+                  و<span class="key-label">w</span>
+                </button>
+                <button class="key" data-char="ي">
+                  ي<span class="key-label">y</span>
+                </button>
+                <button class="key" data-char="ء">
+                  ء<span class="key-label">2</span>
+                </button>
+                <button class="key" data-char="آ">
+                  آ<span class="key-label">aa</span>
+                </button>
+                <button class="key" data-char="ة">
+                  ة<span class="key-label">h'</span>
+                </button>
+                <button class="key" data-char="ى">
+                  ى<span class="key-label">Y</span>
+                </button>
+              </div>
+              <div class="keyboard-row">
+                <button class="key key-small" data-char="َ">
+                  َ<span class="key-label">=a</span>
+                </button>
+                <button class="key key-small" data-char="ِ">
+                  ِ<span class="key-label">=i</span>
+                </button>
+                <button class="key key-small" data-char="ُ">
+                  ُ<span class="key-label">=u</span>
+                </button>
+                <button class="key key-small" data-char="ً">
+                  ً<span class="key-label">==a</span>
+                </button>
+                <button class="key key-small" data-char="ٍ">
+                  ٍ<span class="key-label">==i</span>
+                </button>
+                <button class="key key-small" data-char="ٌ">
+                  ٌ<span class="key-label">==u</span>
+                </button>
+                <button class="key key-small" data-char="ّ">
+                  ّ<span class="key-label">=w</span>
+                </button>
+                <button class="key key-small" data-char="ْ">
+                  ْ<span class="key-label">=o</span>
+                </button>
+                <button class="key" data-char=" ">Space</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="guide" id="guide">
+            <h3 id="guideTitle">Modern Typing Guide</h3>
+            <div class="guide-grid" id="guideContent"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="container">
+          <h2>Two Ways to Type Arabic</h2>
+
+          <h3>Modern Mode (Recommended)</h3>
+          <p>
+            Type naturally with intuitive letter combinations. Perfect for
+            beginners and mobile users. Numbers automatically convert to Arabic
+            letters for dialectal writing.
+          </p>
+          <ul>
+            <li>
+              Type <strong>sh</strong> for ش, <strong>th</strong> for ث,
+              <strong>kh</strong> for خ
+            </li>
+            <li>
+              Numbers convert automatically: <strong>3</strong> → ع,
+              <strong>7</strong> → ح
+            </li>
+            <li>Natural flow, no special characters needed</li>
+            <li>Works great on mobile keyboards</li>
+          </ul>
+
+          <h3>Legacy Mode</h3>
+          <p>
+            Compatible with traditional Arabic keyboard systems. Uses
+            apostrophes and capitals for special characters. Perfect for users
+            migrating from other tools.
+          </p>
+          <ul>
+            <li>
+              Type apostrophe for variants: <strong>s'</strong> → ش,
+              <strong>t'</strong> → ث
+            </li>
+            <li>
+              Use capitals for emphatic letters: <strong>H</strong> → ح,
+              <strong>S</strong> → ص
+            </li>
+            <li>
+              Type <strong>=</strong> after numbers for Eastern Arabic numerals
+            </li>
+            <li>Traditional system, familiar to many users</li>
+          </ul>
+
+          <h3>Choose What Works For You</h3>
+          <p>
+            Switch between modes anytime with the toggle above. Your preference
+            is automatically saved. Both modes produce perfect Arabic text - use
+            whichever feels more natural to you.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-links">
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+            <a href="/contact">Contact</a>
+          </div>
+          <p class="copyright">© 2025 Arabic Keyboard. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Arabic Keyboard Online - Free Typing Tool | Type Arabic</title>
+        <meta
+          name="description"
+          content="Modern Arabic keyboard with smart transliteration. Supports both modern and legacy typing modes. Free online tool for Arabic typing."
+        />
+        <meta
+          name="keywords"
+          content="arabic keyboard, clavier arabe, arabic typing, type arabic online, arabic keyboard online"
+        />
+        <link rel="canonical" href="https://arabickeyboard.com/" />
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
+          :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --radius: 8px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+              0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+              "Helvetica Neue", Arial, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
+
+          .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+          }
+
+          header {
+            border-bottom: 1px solid var(--gray-200);
+            padding: 24px 0;
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            z-index: 100;
+          }
+
+          .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+          }
+
+          .logo {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            text-decoration: none;
+          }
+
+          .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+          }
+
+          .lang-select {
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+          }
+
+          .lang-select:hover {
+            border-color: var(--black);
+          }
+
+          .lang-select:focus {
+            outline: 2px solid var(--black);
+            outline-offset: 2px;
+          }
+
+          .tool-section {
+            padding: 48px 0;
+          }
+
+          .tool-header {
+            text-align: center;
+            margin-bottom: 32px;
+          }
+
+          .tool-header h1 {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+          }
+
+          .tool-header p {
+            font-size: 16px;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+          }
+
+          .mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 32px;
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            padding: 4px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+          .mode-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 32px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 6px;
+            font-family: inherit;
+            color: var(--gray-600);
+          }
+
+          .mode-btn.active {
+            background: var(--white);
+            color: var(--black);
+            box-shadow: var(--shadow-sm);
+          }
+
+          .mode-btn:hover:not(.active) {
+            color: var(--black);
+          }
+
+          .editor-container {
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 24px;
+            transition: var(--transition);
+          }
+
+          .editor-container:focus-within {
+            border-color: var(--black);
+            box-shadow: var(--shadow-md);
+          }
+
+          #textArea {
+            width: 100%;
+            min-height: 200px;
+            padding: 24px;
+            border: none;
+            font-size: 24px;
+            font-family: "Simplified Arabic", "Geeza Pro", "Traditional Arabic",
+              "Arial Unicode MS", sans-serif;
+            direction: rtl;
+            resize: vertical;
+            background: transparent;
+            color: var(--black);
+          }
+
+          #textArea:focus {
+            outline: none;
+          }
+
+          #textArea::placeholder {
+            color: var(--gray-400);
+          }
+
+          .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+          }
+
+          .btn {
+            background: var(--black);
+            color: var(--white);
+            border: 1px solid var(--black);
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+          }
+
+          .btn:hover {
+            background: var(--gray-900);
+          }
+
+          .btn:active {
+            transform: scale(0.98);
+          }
+
+          .btn-secondary {
+            background: var(--white);
+            color: var(--black);
+          }
+
+          .btn-secondary:hover {
+            background: var(--gray-50);
+          }
+
+          .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+
+          .keyboard-section {
+            margin-bottom: 32px;
+          }
+
+          .keyboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+          }
+
+          .keyboard-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+          }
+
+          .keyboard-toggle {
+            background: none;
+            border: none;
+            color: var(--gray-600);
+            cursor: pointer;
+            font-size: 14px;
+            padding: 8px;
+            transition: var(--transition);
+          }
+
+          .keyboard-toggle:hover {
+            color: var(--black);
+          }
+
+          .keyboard {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 24px;
+          }
+
+          .keyboard-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            justify-content: center;
+          }
+
+          .keyboard-row:last-child {
+            margin-bottom: 0;
+          }
+
+          .key {
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            padding: 12px 16px;
+            min-width: 48px;
+            border-radius: 6px;
+            font-size: 20px;
+            font-family: "Simplified Arabic", "Geeza Pro", sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+            text-align: center;
+          }
+
+          .key:hover {
+            background: var(--gray-100);
+            border-color: var(--gray-400);
+          }
+
+          .key:active {
+            transform: scale(0.95);
+            background: var(--gray-200);
+          }
+
+          .key-small {
+            font-size: 14px;
+            min-width: auto;
+            padding: 8px 12px;
+          }
+
+          .key-label {
+            display: block;
+            font-size: 11px;
+            color: var(--gray-500);
+            margin-top: 4px;
+          }
+
+          .guide {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 48px;
+          }
+
+          .guide h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+          }
+
+          .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+          }
+
+          .guide-item {
+            font-size: 14px;
+            color: var(--gray-600);
+            padding: 8px 0;
+          }
+
+          .guide-item code {
+            background: var(--white);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: "Monaco", "Menlo", monospace;
+            font-size: 13px;
+            color: var(--black);
+            border: 1px solid var(--gray-200);
+          }
+
+          .content {
+            padding: 48px 0;
+            border-top: 1px solid var(--gray-200);
+          }
+
+          .content h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+          }
+
+          .content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 16px;
+          }
+
+          .content p {
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            line-height: 1.7;
+          }
+
+          .content ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 24px;
+          }
+
+          .content li {
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 12px;
+            color: var(--gray-600);
+          }
+
+          .content li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--black);
+            font-weight: bold;
+          }
+
+          footer {
+            border-top: 1px solid var(--gray-200);
+            padding: 48px 0;
+            margin-top: 48px;
+          }
+
+          .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+          }
+
+          .footer-links {
+            display: flex;
+            gap: 24px;
+          }
+
+          .footer-links a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+          }
+
+          .footer-links a:hover {
+            color: var(--black);
+          }
+
+          .copyright {
+            color: var(--gray-500);
+            font-size: 14px;
+          }
+
+          @media (max-width: 768px) {
+            .container {
+              padding: 0 16px;
+            }
+
+            header {
+              padding: 16px 0;
+            }
+
+            .logo {
+              font-size: 18px;
+            }
+
+            .tool-header h1 {
+              font-size: 28px;
+            }
+
+            #textArea {
+              font-size: 20px;
+              min-height: 160px;
+            }
+
+            .mode-toggle {
+              width: 100%;
+            }
+
+            .mode-btn {
+              flex: 1;
+              padding: 12px 16px;
+            }
+
+            .actions {
+              flex-direction: column;
+            }
+
+            .btn {
+              width: 100%;
+            }
+
+            .keyboard-row {
+              gap: 4px;
+            }
+
+            .key {
+              min-width: 40px;
+              padding: 10px 12px;
+              font-size: 18px;
+            }
+
+            .guide-grid {
+              grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+              flex-direction: column;
+              text-align: center;
+            }
+          }
+
+          .hidden {
+            display: none;
+          }
+
+          .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--black);
+            color: var(--white);
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            box-shadow: var(--shadow-md);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1000;
+          }
+
+          .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        </style>
+      </head>
+      <body>
+        <header>
+          <div class="container">
+            <div class="header-content">
+              <a href="/" class="logo">Arabic Keyboard</a>
+              <div class="header-actions">
+                <select class="lang-select" aria-label="Select Language">
+                  <option value="en">English</option>
+                  <option value="ar">العربية</option>
+                  <option value="fr">Français</option>
+                  <option value="es">Español</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <section class="tool-section">
+            <div class="container">
+              <div class="tool-header">
+                <h1>Type Arabic Online</h1>
+                <p>
+                  Professional Arabic keyboard with smart transliteration.
+                  Choose your preferred typing method.
+                </p>
+              </div>
+
+              <div class="mode-toggle">
+                <button
+                  class="mode-btn active"
+                  data-mode="modern"
+                  aria-label="Modern typing mode"
+                >
+                  Modern
+                </button>
+                <button
+                  class="mode-btn"
+                  data-mode="legacy"
+                  aria-label="Legacy typing mode"
+                >
+                  Legacy
+                </button>
+              </div>
+
+              <div class="editor-container">
+                <textarea
+                  id="textArea"
+                  placeholder="ابدأ الكتابة هنا..."
+                  aria-label="Arabic text editor"
+                  spellcheck="false"
+                  autocomplete="off"
+                ></textarea>
+              </div>
+
+              <div class="actions">
+                <button class="btn" id="copyBtn" aria-label="Copy text">
+                  Copy Text
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  id="downloadBtn"
+                  aria-label="Download text"
+                >
+                  Download
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  id="clearBtn"
+                  aria-label="Clear text"
+                >
+                  Clear
+                </button>
+              </div>
+
+              <div class="keyboard-section">
+                <div class="keyboard-header">
+                  <h2>Virtual Keyboard</h2>
+                  <button
+                    class="keyboard-toggle"
+                    id="keyboardToggle"
+                    aria-label="Toggle keyboard"
+                  >
+                    Show/Hide
+                  </button>
+                </div>
+                <div class="keyboard" id="keyboard">
+                  <div class="keyboard-row">
+                    <button class="key" data-char="ا">
+                      ا<span class="key-label">a</span>
+                    </button>
+                    <button class="key" data-char="ب">
+                      ب<span class="key-label">b</span>
+                    </button>
+                    <button class="key" data-char="ت">
+                      ت<span class="key-label">t</span>
+                    </button>
+                    <button class="key" data-char="ث">
+                      ث<span class="key-label">th</span>
+                    </button>
+                    <button class="key" data-char="ج">
+                      ج<span class="key-label">j</span>
+                    </button>
+                    <button class="key" data-char="ح">
+                      ح<span class="key-label">H</span>
+                    </button>
+                    <button class="key" data-char="خ">
+                      خ<span class="key-label">kh</span>
+                    </button>
+                    <button class="key" data-char="د">
+                      د<span class="key-label">d</span>
+                    </button>
+                    <button class="key" data-char="ذ">
+                      ذ<span class="key-label">dh</span>
+                    </button>
+                    <button class="key" data-char="ر">
+                      ر<span class="key-label">r</span>
+                    </button>
+                    <button class="key" data-char="ز">
+                      ز<span class="key-label">z</span>
+                    </button>
+                  </div>
+                  <div class="keyboard-row">
+                    <button class="key" data-char="س">
+                      س<span class="key-label">s</span>
+                    </button>
+                    <button class="key" data-char="ش">
+                      ش<span class="key-label">sh</span>
+                    </button>
+                    <button class="key" data-char="ص">
+                      ص<span class="key-label">S</span>
+                    </button>
+                    <button class="key" data-char="ض">
+                      ض<span class="key-label">D</span>
+                    </button>
+                    <button class="key" data-char="ط">
+                      ط<span class="key-label">T</span>
+                    </button>
+                    <button class="key" data-char="ظ">
+                      ظ<span class="key-label">Z</span>
+                    </button>
+                    <button class="key" data-char="ع">
+                      ع<span class="key-label">3</span>
+                    </button>
+                    <button class="key" data-char="غ">
+                      غ<span class="key-label">gh</span>
+                    </button>
+                    <button class="key" data-char="ف">
+                      ف<span class="key-label">f</span>
+                    </button>
+                    <button class="key" data-char="ق">
+                      ق<span class="key-label">q</span>
+                    </button>
+                    <button class="key" data-char="ك">
+                      ك<span class="key-label">k</span>
+                    </button>
+                  </div>
+                  <div class="keyboard-row">
+                    <button class="key" data-char="ل">
+                      ل<span class="key-label">l</span>
+                    </button>
+                    <button class="key" data-char="م">
+                      م<span class="key-label">m</span>
+                    </button>
+                    <button class="key" data-char="ن">
+                      ن<span class="key-label">n</span>
+                    </button>
+                    <button class="key" data-char="ه">
+                      ه<span class="key-label">h</span>
+                    </button>
+                    <button class="key" data-char="و">
+                      و<span class="key-label">w</span>
+                    </button>
+                    <button class="key" data-char="ي">
+                      ي<span class="key-label">y</span>
+                    </button>
+                    <button class="key" data-char="ء">
+                      ء<span class="key-label">2</span>
+                    </button>
+                    <button class="key" data-char="آ">
+                      آ<span class="key-label">aa</span>
+                    </button>
+                    <button class="key" data-char="ة">
+                      ة<span class="key-label">h'</span>
+                    </button>
+                    <button class="key" data-char="ى">
+                      ى<span class="key-label">Y</span>
+                    </button>
+                  </div>
+                  <div class="keyboard-row">
+                    <button class="key key-small" data-char="َ">
+                      َ<span class="key-label">=a</span>
+                    </button>
+                    <button class="key key-small" data-char="ِ">
+                      ِ<span class="key-label">=i</span>
+                    </button>
+                    <button class="key key-small" data-char="ُ">
+                      ُ<span class="key-label">=u</span>
+                    </button>
+                    <button class="key key-small" data-char="ً">
+                      ً<span class="key-label">==a</span>
+                    </button>
+                    <button class="key key-small" data-char="ٍ">
+                      ٍ<span class="key-label">==i</span>
+                    </button>
+                    <button class="key key-small" data-char="ٌ">
+                      ٌ<span class="key-label">==u</span>
+                    </button>
+                    <button class="key key-small" data-char="ّ">
+                      ّ<span class="key-label">=w</span>
+                    </button>
+                    <button class="key key-small" data-char="ْ">
+                      ْ<span class="key-label">=o</span>
+                    </button>
+                    <button class="key" data-char=" ">Space</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="guide" id="guide">
+                <h3 id="guideTitle">Modern Typing Guide</h3>
+                <div class="guide-grid" id="guideContent"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="content">
+            <div class="container">
+              <h2>Two Ways to Type Arabic</h2>
+
+              <h3>Modern Mode (Recommended)</h3>
+              <p>
+                Type naturally with intuitive letter combinations. Perfect for
+                beginners and mobile users. Numbers automatically convert to
+                Arabic letters for dialectal writing.
+              </p>
+              <ul>
+                <li>
+                  Type <strong>sh</strong> for ش, <strong>th</strong> for ث,
+                  <strong>kh</strong> for خ
+                </li>
+                <li>
+                  Numbers convert automatically: <strong>3</strong> → ع,
+                  <strong>7</strong> → ح
+                </li>
+                <li>Natural flow, no special characters needed</li>
+                <li>Works great on mobile keyboards</li>
+              </ul>
+
+              <h3>Legacy Mode</h3>
+              <p>
+                Compatible with traditional Arabic keyboard systems. Uses
+                apostrophes and capitals for special characters. Perfect for
+                users migrating from other tools.
+              </p>
+              <ul>
+                <li>
+                  Type apostrophe for variants: <strong>s'</strong> → ش,
+                  <strong>t'</strong> → ث
+                </li>
+                <li>
+                  Use capitals for emphatic letters: <strong>H</strong> → ح,
+                  <strong>S</strong> → ص
+                </li>
+                <li>
+                  Type <strong>=</strong> after numbers for Eastern Arabic
+                  numerals
+                </li>
+                <li>Traditional system, familiar to many users</li>
+              </ul>
+
+              <h3>Choose What Works For You</h3>
+              <p>
+                Switch between modes anytime with the toggle above. Your
+                preference is automatically saved. Both modes produce perfect
+                Arabic text - use whichever feels more natural to you.
+              </p>
+            </div>
+          </section>
+        </main>
+
+        <footer>
+          <div class="container">
+            <div class="footer-content">
+              <div class="footer-links">
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+                <a href="/contact">Contact</a>
+              </div>
+              <p class="copyright">
+                © 2025 Arabic Keyboard. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </footer>
+
+        <div class="toast" id="toast"></div>
+
+        <script>
+          class Transliterator {
+            constructor(targetElement, mode = "modern") {
+              if (!targetElement) throw new Error("targetElement required");
+              this.el = targetElement;
+              this.mode = mode;
+              this.composing = false;
+
+              this.el.addEventListener("input", this.onInput.bind(this));
+              this.el.addEventListener("compositionstart", () => {
+                this.composing = true;
+              });
+              this.el.addEventListener("compositionend", (e) => {
+                this.composing = false;
+                this.onInput(e);
+              });
+            }
+
+            setMode(mode) {
+              this.mode = mode;
+            }
+
+            buildModernTable() {
+              return [
+                [/==a/g, "ً"],
+                [/==i/g, "ٍ"],
+                [/==u/g, "ٌ"],
+                [/=a/g, "َ"],
+                [/=i/g, "ِ"],
+                [/=u/g, "ُ"],
+                [/=w/g, "ّ"],
+                [/=o/g, "ْ"],
+                [/_/g, "ـ"],
+                [/\?/g, "؟"],
+                [/;/g, "؛"],
+                [/,/g, "،"],
+                [/0=/g, "٠"],
+                [/1=/g, "١"],
+                [/2=/g, "٢"],
+                [/3=/g, "٣"],
+                [/4=/g, "٤"],
+                [/5=/g, "٥"],
+                [/6=/g, "٦"],
+                [/7=/g, "٧"],
+                [/8=/g, "٨"],
+                [/9=/g, "٩"],
+                [/%=/g, "٪"],
+                [/3/g, "ع"],
+                [/7/g, "ح"],
+                [/9/g, "ق"],
+                [/2/g, "ء"],
+                [/sh/gi, "ش"],
+                [/th/gi, "ث"],
+                [/kh/gi, "خ"],
+                [/dh/gi, "ذ"],
+                [/gh/gi, "غ"],
+                [/ch/gi, "چ"],
+                [/aa/gi, "آ"],
+                [/ee/gi, "ي"],
+                [/oo/gi, "و"],
+                [/ou/gi, "و"],
+                [/ه'/g, "ة"],
+                [/و'/g, "ؤ"],
+                [/ي'/g, "ئ"],
+                [/ا'/g, "أ"],
+                [/\bal[- ]/gi, "ال"],
+                [/[aâàā]/gi, "ا"],
+                [/b/gi, "ب"],
+                [/t/gi, "ت"],
+                [/j/gi, "ج"],
+                [/H/g, "ح"],
+                [/x/gi, "خ"],
+                [/d/gi, "د"],
+                [/r/gi, "ر"],
+                [/z/gi, "ز"],
+                [/s/gi, "س"],
+                [/S/g, "ص"],
+                [/D/g, "ض"],
+                [/T/g, "ط"],
+                [/Z/g, "ظ"],
+                [/[gʿ]/gi, "ع"],
+                [/f/gi, "ف"],
+                [/q/gi, "ق"],
+                [/k/gi, "ك"],
+                [/l/gi, "ل"],
+                [/m/gi, "م"],
+                [/n/gi, "ن"],
+                [/h/gi, "ه"],
+                [/[wuoô]/gi, "و"],
+                [/[yieî]/gi, "ي"],
+                [/p/gi, "پ"],
+                [/v/gi, "ڤ"],
+                [/c/gi, "ك"],
+                [/'/g, "ء"],
+              ];
+            }
+
+            buildLegacyTable() {
+              return [
+                [/==a/g, "ً"],
+                [/==i/g, "ٍ"],
+                [/==u/g, "ٌ"],
+                [/=a/g, "َ"],
+                [/=i/g, "ِ"],
+                [/=u/g, "ُ"],
+                [/=w/g, "ّ"],
+                [/=o/g, "ْ"],
+                [/_/g, "ـ"],
+                [/\?/g, "؟"],
+                [/;/g, "؛"],
+                [/,/g, "،"],
+                [/0=/g, "٠"],
+                [/1=/g, "١"],
+                [/2=/g, "٢"],
+                [/3=/g, "٣"],
+                [/4=/g, "٤"],
+                [/5=/g, "٥"],
+                [/6=/g, "٦"],
+                [/7=/g, "٧"],
+                [/8=/g, "٨"],
+                [/9=/g, "٩"],
+                [/%=/g, "٪"],
+                [/aa/gi, "آ"],
+                [/ه'/g, "ة"],
+                [/s'/gi, "ش"],
+                [/t'/gi, "ث"],
+                [/H'/g, "خ"],
+                [/d'/gi, "ذ"],
+                [/g'/gi, "غ"],
+                [/S'/g, "ص"],
+                [/D'/g, "ض"],
+                [/T'/g, "ط"],
+                [/Z'/g, "ظ"],
+                [/j'/gi, "چ"],
+                [/q'/gi, "ڨ"],
+                [/k'/gi, "ڭ"],
+                [/b'/gi, "پ"],
+                [/f'/gi, "ڤ"],
+                [/\bal[- ]/gi, "ال"],
+                [/[aâàā]/gi, "ا"],
+                [/b/gi, "ب"],
+                [/t/gi, "ت"],
+                [/j/gi, "ج"],
+                [/H/g, "ح"],
+                [/x/gi, "خ"],
+                [/d/gi, "د"],
+                [/r/gi, "ر"],
+                [/z/gi, "ز"],
+                [/s/gi, "س"],
+                [/S/g, "ص"],
+                [/D/g, "ض"],
+                [/T/g, "ط"],
+                [/Z/g, "ظ"],
+                [/[gʿ]/gi, "ع"],
+                [/f/gi, "ف"],
+                [/q/gi, "ق"],
+                [/k/gi, "ك"],
+                [/l/gi, "ل"],
+                [/m/gi, "م"],
+                [/n/gi, "ن"],
+                [/h/gi, "ه"],
+                [/[wuoô]/gi, "و"],
+                [/[yieî]/gi, "ي"],
+                [/p/gi, "ب"],
+                [/v/gi, "ف"],
+                [/c/gi, "ك"],
+                [/'/g, "ء"],
+              ];
+            }
+
+            transform(text) {
+              const table =
+                this.mode === "modern"
+                  ? this.buildModernTable()
+                  : this.buildLegacyTable();
+              let out = text;
+              for (const [pat, repl] of table) {
+                out = out.replace(pat, repl);
+              }
+              return out;
+            }
+
+            onInput(e) {
+              if (this.composing) return;
+              const el = this.el;
+              const original = el.value;
+              const start = el.selectionStart;
+              const end = el.selectionEnd;
+              const scrollTop = el.scrollTop || 0;
+              const transformed = this.transform(original);
+
+              if (original === transformed) return;
+
+              if (start === 0 && end === original.length) {
+                el.value = transformed;
+                el.selectionStart = 0;
+                el.selectionEnd = transformed.length;
+              } else {
+                el.value = transformed;
+                const prefix = original.substring(0, start);
+                const newCaret = this.transform(prefix).length;
+                el.selectionStart = el.selectionEnd = newCaret;
+              }
+              el.scrollTop = scrollTop;
+            }
+          }
+
+          const textArea = document.getElementById("textArea");
+          const transliterator = new Transliterator(textArea, "modern");
+
+          const modernGuides = [
+            { input: "sh", output: "ش", desc: "sheen" },
+            { input: "th", output: "ث", desc: "thaa" },
+            { input: "kh", output: "خ", desc: "khaa" },
+            { input: "dh", output: "ذ", desc: "dhaal" },
+            { input: "gh", output: "غ", desc: "ghain" },
+            { input: "3", output: "ع", desc: "ain" },
+            { input: "7", output: "ح", desc: "haa" },
+            { input: "9", output: "ق", desc: "qaf" },
+            { input: "2", output: "ء", desc: "hamza" },
+            { input: "aa", output: "آ", desc: "alif madda" },
+            { input: "al-", output: "ال", desc: "article" },
+            { input: "=a", output: "َ", desc: "fatha" },
+            { input: "=i", output: "ِ", desc: "kasra" },
+            { input: "=u", output: "ُ", desc: "damma" },
+            { input: "==a", output: "ً", desc: "tanwin fatha" },
+            { input: "=w", output: "ّ", desc: "shadda" },
+          ];
+
+          const legacyGuides = [
+            { input: "s'", output: "ش", desc: "sheen" },
+            { input: "t'", output: "ث", desc: "thaa" },
+            { input: "H'", output: "خ", desc: "khaa" },
+            { input: "d'", output: "ذ", desc: "dhaal" },
+            { input: "g'", output: "غ", desc: "ghain" },
+            { input: "H", output: "ح", desc: "haa (capital)" },
+            { input: "S", output: "ص", desc: "saad (capital)" },
+            { input: "D", output: "ض", desc: "daad (capital)" },
+            { input: "T", output: "ط", desc: "taa (capital)" },
+            { input: "Z", output: "ظ", desc: "zaa (capital)" },
+            { input: "aa", output: "آ", desc: "alif madda" },
+            { input: "h'", output: "ة", desc: "taa marbutah" },
+            { input: "3=", output: "٣", desc: "Eastern numeral" },
+            { input: "=a", output: "َ", desc: "fatha" },
+            { input: "=i", output: "ِ", desc: "kasra" },
+            { input: "=u", output: "ُ", desc: "damma" },
+          ];
+
+          function updateGuide(mode) {
+            const guideTitle = document.getElementById("guideTitle");
+            const guideContent = document.getElementById("guideContent");
+            const guides = mode === "modern" ? modernGuides : legacyGuides;
+
+            guideTitle.textContent =
+              mode === "modern" ? "Modern Typing Guide" : "Legacy Typing Guide";
+            guideContent.innerHTML = guides
+              .map(
+                (g) =>
+                  `<div class="guide-item"><code>${g.input}</code> → ${g.output} <span style="color: var(--gray-500)">(${g.desc})</span></div>`
+              )
+              .join("");
+          }
+
+          const modeButtons = document.querySelectorAll(".mode-btn");
+          modeButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const mode = btn.getAttribute("data-mode");
+
+              modeButtons.forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+
+              transliterator.setMode(mode);
+              updateGuide(mode);
+
+              try {
+                localStorage.setItem("arabicKeyboardMode", mode);
+              } catch (e) {}
+
+              textArea.focus();
+            });
+          });
+
+          try {
+            const savedMode = localStorage.getItem("arabicKeyboardMode");
+            if (
+              savedMode &&
+              (savedMode === "modern" || savedMode === "legacy")
+            ) {
+              const btn = document.querySelector(`[data-mode="${savedMode}"]`);
+              if (btn) btn.click();
+            }
+          } catch (e) {}
+
+          updateGuide("modern");
+
+          const keys = document.querySelectorAll(".key");
+          keys.forEach((key) => {
+            key.addEventListener("click", () => {
+              const char = key.getAttribute("data-char");
+              if (char) {
+                const start = textArea.selectionStart;
+                const end = textArea.selectionEnd;
+                const before = textArea.value.substring(0, start);
+                const after = textArea.value.substring(end);
+                textArea.value = before + char + after;
+                const newPos = start + char.length;
+                textArea.selectionStart = textArea.selectionEnd = newPos;
+                textArea.focus();
+              }
+            });
+          });
+
+          document.getElementById("copyBtn").addEventListener("click", () => {
+            if (!textArea.value) {
+              showToast("Nothing to copy");
+              return;
+            }
+            textArea.select();
+            try {
+              document.execCommand("copy");
+              showToast("Text copied to clipboard");
+            } catch (e) {
+              showToast("Copy failed - please try manually");
+            }
+          });
+
+          document
+            .getElementById("downloadBtn")
+            .addEventListener("click", () => {
+              const text = textArea.value;
+              if (!text) {
+                showToast("Nothing to download");
+                return;
+              }
+              try {
+                const blob = new Blob([text], {
+                  type: "text/plain;charset=utf-8",
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "arabic-text.txt";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast("Text downloaded");
+              } catch (e) {
+                showToast("Download failed");
+              }
+            });
+
+          document.getElementById("clearBtn").addEventListener("click", () => {
+            if (!textArea.value) {
+              return;
+            }
+            if (confirm("Clear all text?")) {
+              textArea.value = "";
+              textArea.focus();
+              showToast("Text cleared");
+            }
+          });
+
+          const keyboard = document.getElementById("keyboard");
+          const keyboardToggle = document.getElementById("keyboardToggle");
+          keyboardToggle.addEventListener("click", () => {
+            keyboard.classList.toggle("hidden");
+          });
+
+          function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+              toast.classList.remove("show");
+            }, 2000);
+          }
+
+          textArea.focus();
+        </script>
+      </body>
+    </html>
+  </body>
+</html>
