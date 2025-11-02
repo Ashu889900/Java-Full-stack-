@@ -1,3 +1,4 @@
+package basics;
 class Message {
 
     public void printMessage(int message) {
